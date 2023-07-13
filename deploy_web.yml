@@ -1,0 +1,21 @@
+
+- name: Deploy Web application
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy web files
+      copy:
+        src: /home/ubuntu/playbooks/index.html
+        dest: /var/www/html
+
